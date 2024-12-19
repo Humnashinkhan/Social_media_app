@@ -2,33 +2,44 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Browse = () => {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+   
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
     if (!userData) {
-      navigate("/"); // Redirect to login if user data is missing
+      navigate("/"); 
     } else {
       setUser(JSON.parse(userData));
     }
   }, [navigate]);
+  
+
+  
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       {user ? (
-        <div className="text-center">
+        <div className="flex">
           <img
             src={user.profilePic}
             alt="Profile"
-            className="w-24 h-24 rounded-full shadow-md"
+            className="w-24 h-24 ml-5 mt-5 p-1 rounded-full shadow-md"
           />
-          <h2 className="mt-4 text-xl font-semibold">{user.name}</h2>
+          <div className="mt-12 ml-5">
+          <h2>Welcome Back </h2>
+          <h2 className="text-xl font-bold">{user.name}</h2>
           <p className="mt-2 text-gray-600">{user.email}</p>
+            </div>
         </div>
-      ) : (
+    ) : (
         <p>Loading...</p>
       )}
+      <div className="mt-16 ml-8">
+        <h1 className='text-2xl font-bold'>Feeds</h1>
+        <button>Add</button>
+      </div>
     </div>
   );
 };
